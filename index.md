@@ -6,8 +6,8 @@ bodyClass: spec
 
 ## Criteria
 
-- How well does a particular specification or technology implement the extensibility approach outlined in the Extensible Web Manifesto?
-- Has the spec exposed a low-level capabiloty?
+- How well does a particular specification or technology implement the extensibility approach outlined in the [Extensible Web Manifesto](http://extensiblewebmanifesto.org)?
+- Has the spec exposed a low-level capability?
 - Does the spec have a good layering story?
 
 ## Overall Discussion
@@ -34,7 +34,7 @@ When JS was slow, it was hard to build even basic abstractions. The next frontie
 
 Explains how the parser generates a DOM tree of JavaScript objects from a stream of HTML text.
 
-Related issue: https://github.com/w3ctag/spec-reviews/issues/16
+Related issue: [https://github.com/w3ctag/spec-reviews/issues/16](https://github.com/w3ctag/spec-reviews/issues/16)
 
 ### `<template>`
 
@@ -58,7 +58,7 @@ Proxies, weak maps, getters and setters. Pretty much everything except `document
 
 [need some text]
 
-Related issue: https://github.com/w3ctag/spec-reviews/issues/3
+Related issue: [https://github.com/w3ctag/spec-reviews/issues/3](https://github.com/w3ctag/spec-reviews/issues/3)
 
 </section>
 
@@ -85,11 +85,11 @@ Need e.g. custom pseudo-elements as a way of exposing standardized styling hooks
 
 ### Audio
 
-The fact web audio exists is awesome compared to just having `<audio>`. But layering story is not yet good, both within web audio and how it relates to `<audio>`.
+The fact web audio exists is awesome compared to just having `<audio>`. But layering story is not yet good, both within web audio and how it https to `<audio>`.
 
-E.g., how does Web Audio related to the default output context for a page? How does it relate to `<audio>` and `<video>`? Can we implement `PannerNode` as code on top of some kind of scriptable audio node?
+E.g., how does Web Audio httpd to the default output context for a page? How does it relate to `<audio>` and `<video>`? Can we implement `PannerNode` as code on top of some kind of scriptable audio node?
 
-Related issue: https://github.com/w3ctag/spec-reviews/issues/5
+Related issue: [https://github.com/w3ctag/spec-reviews/issues/5](https://github.com/w3ctag/spec-reviews/issues/5)
 
 ### Object.observe
 
@@ -105,7 +105,7 @@ There is also a problem of not knowing exactly how an element was focused (keybo
 
 Promising work but only half standardized and not fully implemented anywhere yet. New working group forming in IETF to work on the protocol part.
 
-Related issue: https://github.com/w3ctag/spec-reviews/issues/6
+Related issue: [https://github.com/w3ctag/spec-reviews/issues/6](https://github.com/w3ctag/spec-reviews/issues/6)
 
 </section>
 
@@ -162,13 +162,13 @@ High-contrast mode -- also detectable by side-effect but not available through a
 
 ### Sensors
 
-We kind of have geolocation and some acces to cameras/mic's, getting ambient light, but not much else. We're slowly getting out of the trap of designing APIs around the assumption of a single sensor of each type. https://github.com/rwaldron/sensors/
+We kind of have geolocation and some acces to cameras/mic's, getting ambient light, but not much else. We're slowly getting out of the trap of designing APIs around the assumption of a single sensor of each type. [https://github.com/rwaldron/sensors/](https://github.com/rwaldron/sensors/)
 
 One interesting example of extensible web principles in play is how device orientation is in some ways a higher-level API on top of a magnetometer (and other stuff). For example, Google Cardboard would ideally like to use the magnetometer API directly, so that low-cost magnets can act as a UI for interfacing with your cardboard VR headset. Instead they have to reverse-engineer the magnetometer's behavior from how the device appears to reorient (according to the device orientation API) when a magnet passes by it.
 
-Issue related to orientation API: https://github.com/w3ctag/spec-reviews/issues/7
+Issue related to orientation API: [https://github.com/w3ctag/spec-reviews/issues/7](https://github.com/w3ctag/spec-reviews/issues/7)
 
-Hopeful: https://github.com/dglazkov/tubes/blob/master/API.md
+Hopeful: [https://github.com/dglazkov/tubes/blob/master/API.md](https://github.com/dglazkov/tubes/blob/master/API.md)
 
 ### Preload Scanner/Resource Priorities
 
