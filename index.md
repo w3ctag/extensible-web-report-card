@@ -7,9 +7,9 @@ bodyClass: spec
 Criteria
 ----------
 
-### How well does a particular specification or technology implement the extensibility approach outlined in the Extensible Web Manifesto?
-### Has the spec exposed a low-level capabiloty?
-### Does the spec have a good layering story?
+- How well does a particular specification or technology implement the extensibility approach outlined in the Extensible Web Manifesto?
+- Has the spec exposed a low-level capabiloty?
+- Does the spec have a good layering story?
 
 Overall Discussion
 -------------------------
@@ -36,6 +36,7 @@ When JS was slow, it was hard to build even basic abstractions. The next frontie
 ### Custom elements
 
 Explains how the parser generates a DOM tree of JavaScript objects from a stream of HTML text.
+
 Related issue: https://github.com/w3ctag/spec-reviews/issues/16
 
 ### `<template>`
@@ -52,10 +53,15 @@ Not unified with Object.observe(). The attribute/property split makes it so we c
 
 Before, this was locked up in the process of creating `<a>` and `<base>` tags, setting their `href`, and then seeing what happens after they go back to the browser's code and do their thing. Now, there is an actual API that exposes relative and absolute [URL parsing](https://url.spec.whatwg.org/#api).
 
-
 ### Explaining the DOM via JavaScript
 
 Proxies, weak maps, getters and setters. Pretty much everything except `document.all`'s falsey-object behavior -- which needs to die in a fire. The shift from "host object" in ES5 to "exotic object" in ES6
+
+### WebCrypto
+
+[need some text]
+
+Related issue: https://github.com/w3ctag/spec-reviews/issues/3
 
 Is Disruptive In Class
 ----------------------------
@@ -70,7 +76,7 @@ We have some loading time APIs (resource timing, navigation timing), but e.g. no
 
 ### Shadow DOM
 
-Doesn't actually explain the platform's shadow DOM due to lack of encapsulation and inability to negotiate layout between the component and its surroundings -- similar issue to <iframe seamless> and x-origin content.
+Doesn't actually explain the platform's shadow DOM due to lack of encapsulation and inability to negotiate layout between the component and its surroundings -- similar issue to `<iframe seamless>` and cross-origin content.
 
 Conflates selector matching, CSS inheritance, and event retargeting isolation boundaries into a single primitive
 
@@ -80,7 +86,7 @@ Need e.g. custom pseudo-elements as a way of exposing standardized styling hooks
 
 The fact web audio exists is awesome compared to just having `<audio>`. But layering story is not yet good, both within web audio and how it relates to `<audio>`.
 
-E.g., how does Web Audio related to the default output context for a page? How does it relate to <audio> and <video>? Can we implement `PannerNode` as code on top of some kind of scriptable audio node?
+E.g., how does Web Audio related to the default output context for a page? How does it relate to `<audio>` and `<video>`? Can we implement `PannerNode` as code on top of some kind of scriptable audio node?
 
 Related issue: https://github.com/w3ctag/spec-reviews/issues/5
 
@@ -97,6 +103,7 @@ There is also a problem of not knowing exactly how an element was focused (keybo
 ### Push API
 
 Promising work but only half standardized and not fully implemented anywhere yet. New working group forming in IETF to work on the protocol part.
+
 Related issue: https://github.com/w3ctag/spec-reviews/issues/6
 
 Runs with Scissors
@@ -112,7 +119,7 @@ Images, audio, video -- all are locked away, both decoding and encoding. Need of
 
 ### CSS, Layout, and Rendering
 
-In general quite poor. Painting algorithm is composed of 12 secret steps that you can't participate in even though we have a bitmap drawing system in the platform (<canvas>). Line breaking is not exposed. Font data is not exposed. RTL decisions are not exposed. Very little control over text quality. No ability to override FOUC/FOUF policies. No extensibility in selectors or media queries. No direct script access to the layer tree. No direct script access to the quad box trees that are generated for 3d transforms. No ability to create a new layout mode.
+In general quite poor. Painting algorithm is composed of 12 secret steps that you can't participate in even though we have a bitmap drawing system in the platform (`<canvas>`). Line breaking is not exposed. Font data is not exposed. RTL decisions are not exposed. Very little control over text quality. No ability to override FOUC/FOUF policies. No extensibility in selectors or media queries. No direct script access to the layer tree. No direct script access to the quad box trees that are generated for 3d transforms. No ability to create a new layout mode.
 
 CSS OM is...low-level in all the wrong ways.
 
@@ -153,6 +160,8 @@ High-contrast mode -- also detectable by side-effect but not available through a
 We kind of have geolocation and some acces to cameras/mic's, getting ambient light, but not much else. We're slowly getting out of the trap of designing APIs around the assumption of a single sensor of each type. https://github.com/rwaldron/sensors/
 
 One interesting example of extensible web principles in play is how device orientation is in some ways a higher-level API on top of a magnetometer (and other stuff). For example, Google Cardboard would ideally like to use the magnetometer API directly, so that low-cost magnets can act as a UI for interfacing with your cardboard VR headset. Instead they have to reverse-engineer the magnetometer's behavior from how the device appears to reorient (according to the device orientation API) when a magnet passes by it.
+
+Issue related to orientation API: https://github.com/w3ctag/spec-reviews/issues/7
 
 Hopeful: https://github.com/dglazkov/tubes/blob/master/API.md
 
