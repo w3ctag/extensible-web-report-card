@@ -4,26 +4,23 @@ title: The Extensible Web Report Card
 bodyClass: spec
 ---
 
-Criteria
-----------
+## Criteria
 
 - How well does a particular specification or technology implement the extensibility approach outlined in the Extensible Web Manifesto?
 - Has the spec exposed a low-level capabiloty?
 - Does the spec have a good layering story?
 
-Overall Discussion
--------------------------
+## Overall Discussion
 
 The process of archealogy to extension. Working top-down vs. bottom-up (both have advantages and disadvantages).
 
-Some web specs intentionally delegate behavior to the OS (scroll, look of form controls, etc.) and this is a good thing. However, it may have the effect of
-making it hard to define extensibility points. When we don't define them, people end up rebuilding the stack, often in a way that works poorly outside of
-the OS they were copying.
+Some web specs intentionally delegate behavior to the OS (scroll, look of form controls, etc.) and this is a good thing. However, it may have the effect of making it hard to define extensibility points. When we don't define them, people end up rebuilding the stack, often in a way that works poorly outside of the OS they were copying.
 
 When you make a new spec that is related (either higher or lower level) to an existing feature, you should explicitly think and describe in the spec how they are connected to each other.
 
-Plays Well With Others
--------------------------------
+<section class="grade">
+
+## Plays Well With Others
 
 ### Service worker!
 
@@ -62,6 +59,10 @@ Proxies, weak maps, getters and setters. Pretty much everything except `document
 [need some text]
 
 Related issue: https://github.com/w3ctag/spec-reviews/issues/3
+
+</section>
+
+<section class="grade">
 
 Is Disruptive In Class
 ----------------------------
@@ -106,6 +107,10 @@ Promising work but only half standardized and not fully implemented anywhere yet
 
 Related issue: https://github.com/w3ctag/spec-reviews/issues/6
 
+</section>
+
+<section class="grade">
+
 Runs with Scissors
 -------------------------
 
@@ -123,7 +128,7 @@ In general quite poor. Painting algorithm is composed of 12 secret steps that yo
 
 CSS OM is...low-level in all the wrong ways.
 
-There are glimmers of hope: the Web Animations spec attempts to explain and unify the platform's various animations (e.g. CSS animations, CSS transitions, and SVG), although exactly how this works is still being specced (TODO: link to the open bugs). The CSSWG has recently agreed to try speccing the box tree, which is foundational to how layout works. And the ["CSS Extensions"](http://tabatkins.github.io/specs/css-aliases/) editor's draft gives us a path toward custom selectors, combinators, at-rules, and functions---in short, making CSS extensions prolyfillable.
+There are glimmers of hope: the Web Animations spec attempts to explain and unify the platform's various animations (e.g. CSS animations, CSS transitions, and SVG), although exactly how this works is [still being specced](https://www.w3.org/Bugs/Public/show_bug.cgi?id=26839). The CSSWG has recently agreed to try speccing the box tree, which is foundational to how layout works. And the ["CSS Extensions"](http://tabatkins.github.io/specs/css-aliases/) editor's draft gives us a path toward custom selectors, combinators, at-rules, and functions---in short, making CSS extensions prolyfillable.
 
 ### Editing (`contenteditable`)
 
@@ -176,3 +181,5 @@ There are a variety of things that native elements can do that custom elements c
 ### The Event Loop
 
 HTML defines concepts of microtasks, tasks, and the enqueuing thereof. However, there is no way for developers to inspect these queues, hook into them, or even just use them directly without hacks like `Promise.resolve().then(doMyMicrotask)` (and [worse](https://github.com/YuzuJS/setImmediate#the-tricks)). Ideally developers would be able to monitor all entries into the event loop, to better implement things like [zones](https://github.com/btford/zone.js/) without having to monkey-patch every async API on the platform.
+
+</section>
