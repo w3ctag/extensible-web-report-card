@@ -18,6 +18,8 @@ Some web specs intentionally delegate behavior to the OS (scroll, look of form c
 
 When you make a new spec that is related (either higher or lower level) to an existing feature, you should explicitly think and describe in the spec how they are connected to each other.
 
+This is a living report card and will continue to change as new information becomes available and as web technologies evolve and become more extensible.  If you have a suggested addition or correction, please “[fork us on github](https://github.com/w3ctag/extensible-web-report-card).”
+
 <section class="grade">
 
 ## Plays Well With Others
