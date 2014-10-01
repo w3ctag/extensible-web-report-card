@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>{{page.title}}</title>
+
+    <link rel="stylesheet" href="assets/screen.css" media="screen" />
+    <link rel="stylesheet" href="assets/print.css" media="print" />
+  </head>
+
+  <body>
+    <header>
+      <h1>The Extensible Web Report Card</h1>
+      <p>Documenting the state of the extensible web</p>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <!-- TODO: get rid of the triple wrappers so I can sleep at night. <body> is the only wrapper you need. -->
+          {{content}}
+        </section>
+      </div>
+    </div>
+
+    <aside id="sidebar">
+      The Extensible Web Report Card is maintained by <a href="http://www.w3.org/2001/tag/">the W3C TAG</a>.
+    </aside>
+  </body>
+</html>

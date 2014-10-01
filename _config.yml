@@ -1,0 +1,5 @@
+encoding: UTF-8
+markdown: redcarpet
+
+redcarpet:
+  extensions: ['smart']
