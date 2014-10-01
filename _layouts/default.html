@@ -4,8 +4,19 @@
     <meta charset="utf-8" />
     <title>{{page.title}}</title>
 
+    {% capture canonical %}http://extensiblewebreportcard.org{{page.url | remove:'index.html' | remove:'.html' | strip_slash}}{% endcapture %}
+
+    <script>
+      "use strict";
+      if (location.href.indexOf("github.io") !== -1) {
+        location.href = "{{canonical}}";
+      }
+    </script>
+
     <link rel="stylesheet" href="assets/screen.css" media="screen" />
     <link rel="stylesheet" href="assets/print.css" media="print" />
+
+    <link rel="canonical" href="{{canonical}}" />
   </head>
 
   <body>
