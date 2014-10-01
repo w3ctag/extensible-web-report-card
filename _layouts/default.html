@@ -21,8 +21,10 @@
 
   <body>
     <header>
-      <h1>The Extensible Web Report Card</h1>
-      <p>Documenting the state of the extensible web</p>
+      <div class="inner"> <!-- TODO kill this wrapper -->
+        <h1>The Extensible Web Report Card</h1>
+        <p>Documenting the state of the extensible web</p>
+      </div>
     </header>
 
     <div id="content-wrapper">
@@ -31,13 +33,13 @@
           <!-- TODO: get rid of the triple wrappers so I can sleep at night. <body> is the only wrapper you need. -->
           {{content}}
         </section>
+
+        <aside id="sidebar">
+          <p>The Extensible Web Report Card is maintained by <a href="http://www.w3.org/2001/tag/">the W3C TAG</a>.</p>
+
+          <script async defer src="assets/toc.js"></script>
+        </aside>
       </div>
     </div>
-
-    <aside id="sidebar">
-      The Extensible Web Report Card is maintained by <a href="http://www.w3.org/2001/tag/">the W3C TAG</a>.
-
-      <script async defer src="assets/toc.js"></script>
-    </aside>
   </body>
 </html>
