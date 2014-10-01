@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Extensible Web Report Card by w3ctag</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Extensible Web Report Card</h1>
+        <h2>Documenting the state of the extensible web</h2>
+        <a href="https://github.com/w3ctag/extensible-web-report-card" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="extensible-web-report-card" class="anchor" href="#extensible-web-report-card"><span class="octicon octicon-link"></span></a>Extensible Web Report Card</h1>
+
+<h2>
+<a name="criteria" class="anchor" href="#criteria"><span class="octicon octicon-link"></span></a>Criteria</h2>
+
+<ul>
+<li>How well does a particular specification or technology implement the extensibility approach outlined in the Extensible Web Manifesto?</li>
+<li>Has the spec exposed a low-level capabiloty?</li>
+<li>Does the spec have a good layering story?</li>
+</ul><h2>
+<a name="overall-discussion" class="anchor" href="#overall-discussion"><span class="octicon octicon-link"></span></a>Overall Discussion</h2>
+
+<p>The process of archealogy to extension. Working top-down vs. bottom-up (both have advantages and disadvantages).</p>
+
+<p>Some web specs intentionally delegate behavior to the OS (scroll, look of form controls, etc.) and this is a good thing. However, it may have the effect of
+making it hard to define extensibility points. When we don't define them, people end up rebuilding the stack, often in a way that works poorly outside of
+the OS they were copying.</p>
+
+<p>When you make a new spec that is related (either higher or lower level) to an existing feature, you should explicitly think and describe in the spec how they are connected to each other.</p>
+
+<h2>
+<a name="plays-well-with-others" class="anchor" href="#plays-well-with-others"><span class="octicon octicon-link"></span></a>Plays Well With Others</h2>
+
+<h3>
+<a name="service-worker" class="anchor" href="#service-worker"><span class="octicon octicon-link"></span></a>Service worker!</h3>
+
+<h3>
+<a name="asmjs" class="anchor" href="#asmjs"><span class="octicon octicon-link"></span></a>asm.js</h3>
+
+<p>Fast code is enabling. There are things you simply cannot do without good performance (games, codecs).</p>
+
+<p>When JS was slow, it was hard to build even basic abstractions. The next frontier was low-level memory management via ArrayBuffer. The final frontier was across-the-board native performance via asm.js.</p>
+
+<h3>
+<a name="custom-elements" class="anchor" href="#custom-elements"><span class="octicon octicon-link"></span></a>Custom elements</h3>
+
+<p>Explains how the parser generates a DOM tree of JavaScript objects from a stream of HTML text.</p>
+
+<h3>
+<a name="template" class="anchor" href="#template"><span class="octicon octicon-link"></span></a><code>&lt;template&gt;</code>
+</h3>
+
+<p>Exposes HTML fragment parsing and ability to parse without executing.</p>
+
+<h3>
+<a name="mutation-observers" class="anchor" href="#mutation-observers"><span class="octicon octicon-link"></span></a>Mutation observers</h3>
+
+<p>Explains browser behavior WRT reacting to DOM changes; e.g. for layout/paint invalidation.</p>
+
+<p>Not unified with Object.observe(). The attribute/property split makes it so we can't have nice things.</p>
+
+<h3>
+<a name="url-parsing-api" class="anchor" href="#url-parsing-api"><span class="octicon octicon-link"></span></a>URL Parsing API</h3>
+
+<p>Before, this was locked up in the process of creating <code>&lt;a&gt;</code> and <code>&lt;base&gt;</code> tags, setting their <code>href</code>, and then seeing what happens after they go back to the browser's code and do their thing. Now, there is an actual API that exposes relative and absolute <a href="https://url.spec.whatwg.org/#api">URL parsing</a>.</p>
+
+<h3>
+<a name="push-api" class="anchor" href="#push-api"><span class="octicon octicon-link"></span></a>Push API</h3>
+
+<h3>
+<a name="explaining-the-dom-via-javascript" class="anchor" href="#explaining-the-dom-via-javascript"><span class="octicon octicon-link"></span></a>Explaining the DOM via JavaScript</h3>
+
+<p>Proxies, weak maps, getters and setters. Pretty much everything except <code>document.all</code>'s falsey-object behavior -- which needs to die in a fire. The shift from "host object" in ES5 to "exotic object" in ES6</p>
+
+<h2>
+<a name="is-disruptive-in-class" class="anchor" href="#is-disruptive-in-class"><span class="octicon octicon-link"></span></a>Is Disruptive In Class</h2>
+
+<h3>
+<a name="registerprotocolhandler" class="anchor" href="#registerprotocolhandler"><span class="octicon octicon-link"></span></a>registerProtocolHandler</h3>
+
+<p>A good device capability to expose, but not enough implementations!</p>
+
+<h3>
+<a name="performance-metrics" class="anchor" href="#performance-metrics"><span class="octicon octicon-link"></span></a>Performance Metrics</h3>
+
+<p>We have some loading time APIs (resource timing, navigation timing), but e.g. no FPS measurement API. (Link to talks.)</p>
+
+<h3>
+<a name="shadow-dom" class="anchor" href="#shadow-dom"><span class="octicon octicon-link"></span></a>Shadow DOM</h3>
+
+<p>Doesn't actually explain the platform's shadow DOM due to lack of encapsulation and inability to negotiate layout between the component and its surroundings -- similar issue to  and x-origin content.</p>
+
+<p>Conflates selector matching, CSS inheritance, and event retargeting isolation boundaries into a single primitive</p>
+
+<p>Need e.g. custom pseudo-elements as a way of exposing standardized styling hooks, both for developer-created controls and for standard controls like <code>&lt;details&gt;</code> or <code>&lt;input type="date"&gt;</code>.</p>
+
+<h3>
+<a name="audio" class="anchor" href="#audio"><span class="octicon octicon-link"></span></a>Audio</h3>
+
+<p>The fact web audio exists is awesome compared to just having <code>&lt;audio&gt;</code>. But layering story is not yet good, both within web audio and how it relates to <code>&lt;audio&gt;</code>.</p>
+
+<p>E.g., how does Web Audio related to the default output context for a page? How does it relate to  and ? Can we implement <code>PannerNode</code> as code on top of some kind of scriptable audio node?</p>
+
+<h3>
+<a name="objectobserve" class="anchor" href="#objectobserve"><span class="octicon octicon-link"></span></a>Object.observe</h3>
+
+<p>Good primitive, helps explain things. Lack of implementations is holding it back.</p>
+
+<h3>
+<a name="intention-events" class="anchor" href="#intention-events"><span class="octicon octicon-link"></span></a>Intention Events</h3>
+
+<p>Ability to understand a platform-specific, high-level intention like "paste", vs. having to reverse-engineer from the specific keyboard events that occurred. This can be especially problematic because the intent can be triggered in different ways in different platforms (or via screen readers etc.). An easy example is how on Windows undo is Ctrl+Z; on Mac it is Cmd+Z; on iOS it is shaking your device up and down.</p>
+
+<p>There is also a problem of not knowing exactly how an element was focused (keyboard focus should show a visual indicator, but mouse should not, and the details may be different per platform).</p>
+
+<h2>
+<a name="runs-with-scissors" class="anchor" href="#runs-with-scissors"><span class="octicon octicon-link"></span></a>Runs with Scissors</h2>
+
+<h3>
+<a name="forms" class="anchor" href="#forms"><span class="octicon octicon-link"></span></a>Forms</h3>
+
+<p>Forms have a lot of problems. E.g. FormData lacks serialization; we have no filepicker API to get the binary blobs from the user's filesystem ourselves; custom elements cannot participate in form submission or get into <code>form.elements</code>; validation rules (and UI) are fixed and non-extensible. There are many CSS pseudoselectors having to do with forms that custom elements cannot make match themselves, e.g. <code>:readonly</code>, <code>:valid</code>/<code>:invalid</code>, ...</p>
+
+<h3>
+<a name="codecs" class="anchor" href="#codecs"><span class="octicon octicon-link"></span></a>Codecs</h3>
+
+<p>Images, audio, video -- all are locked away, both decoding and encoding. Need off-main-thread APIs; e.g. explained via workers. Similarly timing about when/where to do image decodes is not exposed making it difficult to efficiently polyfill <code>&lt;img&gt;</code>.</p>
+
+<h3>
+<a name="css-layout-and-rendering" class="anchor" href="#css-layout-and-rendering"><span class="octicon octicon-link"></span></a>CSS, Layout, and Rendering</h3>
+
+<p>In general quite poor. Painting algorithm is composed of 12 secret steps that you can't participate in even though we have a bitmap drawing system in the platform (). Line breaking is not exposed. Font data is not exposed. RTL decisions are not exposed. Very little control over text quality. No ability to override FOUC/FOUF policies. No extensibility in selectors or media queries. No direct script access to the layer tree. No direct script access to the quad box trees that are generated for 3d transforms. No ability to create a new layout mode.</p>
+
+<p>CSS OM is...low-level in all the wrong ways.</p>
+
+<p>There are glimmers of hope: the Web Animations spec attempts to explain and unify the platform's various animations (e.g. CSS animations, CSS transitions, and SVG), although exactly how this works is still being specced (TODO: link to the open bugs). The CSSWG has recently agreed to try speccing the box tree, which is foundational to how layout works. And the <a href="http://tabatkins.github.io/specs/css-aliases/">"CSS Extensions"</a> editor's draft gives us a path toward custom selectors, combinators, at-rules, and functions---in short, making CSS extensions prolyfillable.</p>
+
+<h3>
+<a name="editing-contenteditable" class="anchor" href="#editing-contenteditable"><span class="octicon octicon-link"></span></a>Editing (<code>contenteditable</code>)</h3>
+
+<p><code>contenteditable</code> is the epitome of a non-extensible high-level API that tries to do too much, and forces developers to reinvent most of it when it fails for their particular use case. Posts like <a href="https://medium.com/medium-eng/why-contenteditable-is-terrible-122d8a40e480">"Why ContentEditable is Terrible, Or: How the Medium Editor Works"</a> explain this in depth. There are efforts to reform <code>contenteditable</code> back down to its component pieces, such as intention events, cursor support, and more. But they are very nascent.</p>
+
+<h3>
+<a name="csp" class="anchor" href="#csp"><span class="octicon octicon-link"></span></a>CSP</h3>
+
+<p>Useful, provides control over behavior previously reserved to the UA (good!) but needs an API</p>
+
+<h3>
+<a name="appcache" class="anchor" href="#appcache"><span class="octicon octicon-link"></span></a>AppCache</h3>
+
+<p>Getting help. Has been sent to summer school.</p>
+
+<h3>
+<a name="scrolling" class="anchor" href="#scrolling"><span class="octicon octicon-link"></span></a>Scrolling</h3>
+
+<p>Scroll is fundamentally a native capability that works differently across platforms. Attempts to polyfill with JS require per-platform detection and implementation (not feasible in practice).</p>
+
+<p>Hooks into the lifecycle help users perform actions together with scrolling, but they are currently too limited for some use-cases, such as pull-to-refresh and DOM replacement (like <code>NSTableView</code>).</p>
+
+<p>Glimmers of hope: Chrome's beforescroll proposal; iOS 8's better stuff; proposals to make scrolling an "animation timeline"</p>
+
+<h3>
+<a name="aria--a11y" class="anchor" href="#aria--a11y"><span class="octicon octicon-link"></span></a>ARIA &amp; a11y</h3>
+
+<p>Accessibility engine is not exposed very well. E.g. <code>&lt;figcaption&gt;</code> is exposed to accessibility technologies as captions, but ARIA has no <code>role="caption"</code>. There is no way to tell assistive technology certain things ("you are on a manipulable range slider"), or take intents from an assistive technology ("move this slider left") and make them work for your own custom controls.</p>
+
+<p>ARIA is a closed vocabulary (ala HTML without Custom Elements).</p>
+
+<p>Zoom levels -- difficult to to detect if the OS has been put into a mode that enables lower-fidelity pointer interactions. Browsers generally zoom and text gets larger, which is good, but this is detected by side effect in JS.</p>
+
+<p>High-contrast mode -- also detectable by side-effect but not available through an API. Many many hacks required for information that UA's are fully aware of. Should likely be exposed through both API and media query.</p>
+
+<h3>
+<a name="sensors" class="anchor" href="#sensors"><span class="octicon octicon-link"></span></a>Sensors</h3>
+
+<p>We kind of have geolocation and some acces to cameras/mic's, getting ambient light, but not much else. We're slowly getting out of the trap of designing APIs around the assumption of a single sensor of each type. <a href="https://github.com/rwaldron/sensors/">https://github.com/rwaldron/sensors/</a></p>
+
+<p>One interesting example of extensible web principles in play is how device orientation is in some ways a higher-level API on top of a magnetometer (and other stuff). For example, Google Cardboard would ideally like to use the magnetometer API directly, so that low-cost magnets can act as a UI for interfacing with your cardboard VR headset. Instead they have to reverse-engineer the magnetometer's behavior from how the device appears to reorient (according to the device orientation API) when a magnet passes by it.</p>
+
+<p>Hopeful: <a href="https://github.com/dglazkov/tubes/blob/master/API.md">https://github.com/dglazkov/tubes/blob/master/API.md</a></p>
+
+<h3>
+<a name="preload-scannerresource-priorities" class="anchor" href="#preload-scannerresource-priorities"><span class="octicon octicon-link"></span></a>Preload Scanner/Resource Priorities</h3>
+
+<p>Not pluggable, not controllable, no ability to re-order, no ability to set policy a different way to engine built-ins, no ability to understand easily what's "above the fold". </p>
+
+<h3>
+<a name="miscellaneous-native-element-capabilities" class="anchor" href="#miscellaneous-native-element-capabilities"><span class="octicon octicon-link"></span></a>Miscellaneous Native Element Capabilities</h3>
+
+<p>There are a variety of things that native elements can do that custom elements cannot, due to non-extensible mechanisms in the HTML Standard. We have mentioned some of the more important of these above, e.g. accessibility hooks or form submission. But there are many smaller things too. For example only certain elements can become disabled (which impacts user-facing behavior, the matching of the <code>:disabled</code> CSS pseudoselector, and more). Only certain elements can become "active" (CSS <code>:active</code>, and user-exposed), and there is no general way of knowing when this happens. Native elements have more control over how they are focusable.</p>
+
+<h3>
+<a name="the-event-loop" class="anchor" href="#the-event-loop"><span class="octicon octicon-link"></span></a>The Event Loop</h3>
+
+<p>HTML defines concepts of microtasks, tasks, and the enqueuing thereof. However, there is no way for developers to inspect these queues, hook into them, or even just use them directly without hacks like <code>Promise.resolve().then(doMyMicrotask)</code> (and <a href="https://github.com/YuzuJS/setImmediate#the-tricks">worse</a>). Ideally developers would be able to monitor all entries into the event loop, to better implement things like <a href="https://github.com/btford/zone.js/">zones</a> without having to monkey-patch every async API on the platform.</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/w3ctag/extensible-web-report-card/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/w3ctag/extensible-web-report-card/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/w3ctag/extensible-web-report-card"></a> is maintained by <a href="https://github.com/w3ctag">w3ctag</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
