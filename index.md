@@ -87,9 +87,9 @@ Need e.g. custom pseudo-elements as a way of exposing standardized styling hooks
 
 ### Audio
 
-The fact web audio exists is awesome compared to just having `<audio>`. But layering story is not yet good, both within web audio and how it https to `<audio>`.
+The fact web audio exists is awesome compared to just having `<audio>`. But layering story is not yet good, both within web audio and how it relates to `<audio>`.
 
-E.g., how does Web Audio httpd to the default output context for a page? How does it relate to `<audio>` and `<video>`? Can we implement `PannerNode` as code on top of some kind of scriptable audio node?
+E.g., how does Web Audio relate to the default output context for a page? How does it relate to `<audio>` and `<video>`? Can we implement `PannerNode` as code on top of some kind of scriptable audio node?
 
 Related issue: [https://github.com/w3ctag/spec-reviews/issues/5](https://github.com/w3ctag/spec-reviews/issues/5)
 
