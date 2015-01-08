@@ -12,19 +12,25 @@ bodyClass: spec
 
 ## Overall Discussion
 
-The process of archealogy to extension. Working top-down vs. bottom-up (both have advantages and disadvantages).
+The process of archaeology to extension. Working top-down vs. bottom-up (both have advantages and disadvantages).
 
 Some web specs intentionally delegate behavior to the OS (scroll, look of form controls, etc.) and this is a good thing. However, it may have the effect of making it hard to define extensibility points. When we don't define them, people end up rebuilding the stack, often in a way that works poorly outside of the OS they were copying.
 
 When you make a new spec that is related (either higher or lower level) to an existing feature, you should explicitly think and describe in the spec how they are connected to each other.
 
-This is a living report card and will continue to change as new information becomes available and as web technologies evolve and become more extensible.  If you have a suggested addition or correction, please “[fork us on github](https://github.com/w3ctag/extensible-web-report-card).”
+This is a living report card and will continue to change as new information becomes available and as web technologies evolve and become more extensible.
+
+NB: Just because something is not on this list doesn't necessarily mean it's “bad” or “good” with respect to extensibility. It just means we haven't considered that particular specification in our discussions.  If you have a suggestion about how a new or existing spec should be graded as far as extensibility goes (or a suggested correction), please feel free to [open an issue](https://github.com/w3ctag/extensible-web-report-card/issues) or send us a pull request.
 
 <section class="grade">
 
 ## Plays Well With Others
 
-### Service worker!
+### Service Worker
+
+[Service Workers](https://github.com/slightlyoff/ServiceWorker/blob/master/explainer.md) crack open an aspect of browser behavior which was previously not under the control of developers. SWs provide control over the network layer for an origin's request. From an extensibility perspective, they are a viable way to explain how AppCache works and succeed in providing primitives (`fetch()`, events like `onfetch`, and Caches) instead of an omnibus, welded-shut feature.
+
+Areas for improvement include streaming, resource prioritization, interaction with web sockets and other non-HTTP protocols (e.g. WebRTC), and interaction with first-document loading.
 
 ### asm.js
 
@@ -32,35 +38,49 @@ Fast code is enabling. There are things you simply cannot do without good perfor
 
 When JS was slow, it was hard to build even basic abstractions. The next frontier was low-level memory management via ArrayBuffer. The final frontier was across-the-board native performance via asm.js.
 
-### Custom elements
+Areas for improvement include a lack of vectorized instructions, FFI with JS, and threading primitives.
 
-Explains how the parser generates a DOM tree of JavaScript objects from a stream of HTML text.
+### [Custom elements](http://w3c.github.io/webcomponents/spec/custom/)
 
-Related issue: [https://github.com/w3ctag/spec-reviews/issues/16](https://github.com/w3ctag/spec-reviews/issues/16)
+Custom elements is a great example of unearthing fundamental bedrock that was left unexplained for a long time. They give some idea of how the HTML parser generates a DOM tree of JavaScript objects from a stream of text, as well as insight into element lifecycles.
+
+Areas for improvement include adding more lifecycle hooks (e.g. [for cloning](https://www.w3.org/Bugs/Public/show_bug.cgi?id=24570)), integration with ES6 classes, and some subtle issues regarding the "upgrading" of unknown elements at initial parse time to custom elements after registration. Also see the "miscellaneous native element capabilities" section below.
 
 ### `<template>`
 
-Exposes HTML fragment parsing and ability to parse without executing.
+Template finally exposes HTML fragment parsing (i.e. the ability to parse without being confined to a specific context, which is important for elements like `<thead>` etc.). It also gives the ability to parse without executing, separating those two primitives into properly layered capabilities.
 
 ### Mutation observers
 
-Explains browser behavior WRT reacting to DOM changes; e.g. for layout/paint invalidation.
+Mutation obsevers are a start at explaining how browsers react to DOM changes: for example, performing a layout/paint or other update when their HTML attributes change.
 
-Not unified with Object.observe(). The attribute/property split makes it so we can't have nice things.
+An area for improvement, especially with regard to developer-facing ergonomics, is the lack of unification with `Object.observe()`. Since some relevant information about elements is only exposed through JavaScript properties instead of HTML attributes, `Object.observe` would need to be used instead of mutation observers for those (at least, once we spec how `Object.observe` interacts with DOM properties). This situation can be frustrating for developers since they have to watch two sources of data.
 
 ### URL Parsing API
 
-Before, this was locked up in the process of creating `<a>` and `<base>` tags, setting their `href`, and then seeing what happens after they go back to the browser's code and do their thing. Now, there is an actual API that exposes relative and absolute [URL parsing](https://url.spec.whatwg.org/#api).
+URL parsing is a relatively small capability that all browsers have code for, but until recently was not exposed to developers. In the bad old days, you had to create `<a>` and `<base>` tags, set their `href`, and then seeing what happens after they go back through the browser's code and do their thing. Now, there is an actual API that exposes relative and absolute [URL parsing](https://url.spec.whatwg.org/#api)! It's the little things in life.
 
 ### Explaining the DOM via JavaScript
 
-Proxies, weak maps, getters and setters. Pretty much everything except `document.all`'s falsey-object behavior -- which needs to die in a fire. The shift from "host object" in ES5 to "exotic object" in ES6
+These days, pretty much all DOM APIs can be faithfully explained using JavaScript constructs. Getters and setters provide the basics; proxies can be used for exotic cases; and weak maps provide an explanation for private state. The shift in thinking from "host object" with strange capabilities in ES5, to "exotic object" with an overriden meta-object protocol in ES6, provides a good conceptual framework for this going forward, e.g. API authors should prefer ordinary objects to exotic ones. The only remaining unexplained thing is  `document.all`'s falsey-object behavior -- which needs to die in a fire, i.e. we are comfortable leaving it unexplained.
 
-### WebCrypto
+An area for improvement is [a better story for private state](https://esdiscuss.org/topic/proposal-abstract-references); weak maps are semantically complete but syntactically awkward and hard to optimize for this use case.
 
-[need some text]
+### [Web Crypto](https://dvcs.w3.org/hg/webcrypto-api/raw-file/tip/spec/Overview.html)
 
-Related issue: [https://github.com/w3ctag/spec-reviews/issues/3](https://github.com/w3ctag/spec-reviews/issues/3)
+Web Crypto provides access to some of the latent cryptographic primitives that have existed in the web platform for a very long time. This is a hugely heartening development.
+
+Areas for improvement include [access to secure elements (e.g. smart cards)](http://opoto.github.io/secure-element/), explanation of the processing model for crypto operations inside the platform (e.g. a conceptual or practical "secure worker"), and access to more aspects of the TLS stack that is latent in browsers.
+
+### [Web Animations](http://w3c.github.io/web-animations/)
+
+Web Animations expose low-level capabilities and describes how existing animations work in a terms of low-level API.
+
+### [Fetch](https://fetch.spec.whatwg.org/)
+
+Fetch is a good example of platform archaeology. The concept of "fetching," i.e. doing HTTP requests and retrieving corresponding responses, was previously done in a fairly ad-hoc way, with per-use-case customizations growing up in various different contexts. (`<img>`s work one way when same-origin, another cross-origin; `XMLHttpRequest` respects CORS; `<iframe>`s respect certain headers; etc...) The Fetch Standard provides a common conceptual framework every part of the platform can build on, with customization points as necessary to suit the many different use cases in a unified and coherent manner. It then exposes that framework to web developers with the [Fetch API](https://fetch.spec.whatwg.org/#fetch-api).
+
+Areas for improvement include [integration with streams](https://github.com/yutakahirano/fetch-with-streams/), as well as smoothing out any rough edges that are discovered as implementations continue.
 
 </section>
 
@@ -75,9 +95,9 @@ A good device capability to expose, but not enough implementations!
 
 ### Performance Metrics
 
-We have some loading time APIs (resource timing, navigation timing), but e.g. no FPS measurement API. (Link to talks.)
+We have some loading time APIs (resource timing, navigation timing), but e.g. no [FPS measurement API](https://github.com/w3c/frame-timing/wiki/Explainer).
 
-### Shadow DOM
+### [Shadow DOM](http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/)
 
 Doesn't actually explain the platform's shadow DOM due to lack of encapsulation and inability to negotiate layout between the component and its surroundings -- similar issue to `<iframe seamless>` and cross-origin content.
 
@@ -87,25 +107,27 @@ Need e.g. custom pseudo-elements as a way of exposing standardized styling hooks
 
 ### Audio
 
-The fact web audio exists is awesome compared to just having `<audio>`. But layering story is not yet good, both within web audio and how it relates to `<audio>`.
+The [Web Audio API](http://webaudio.github.io/web-audio-api/) exists is awesome compared to just having [`<audio>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio). Exciting new work is enabling users of this API to even [run their own code on the audio thread](https://plus.google.com/+ChrisWilson/posts/QapzKucPp6Y) and explain the built-in Audio Node types as [self-hostable scripts](http://webaudio.github.io/web-audio-api/#dfn-audioworker).
 
-E.g., how does Web Audio relate to the default output context for a page? How does it relate to `<audio>` and `<video>`? Can we implement `PannerNode` as code on top of some kind of scriptable audio node?
+Areas for improvement across the platform remain large: the layering story about how Web Audio explains other APIs remains problematic. How does Web Audio relate to `<audio>` and `<video>` and [WebRTC](http://www.webrtc.org/)? How, for instance, would a developer build a custom element that re-implements `<audio>` using the primitive APIs? It seems that encoding/decoding APIs are missing, buffering and audio file loading are magical, and no API relates an underlying Web Audio context to an `<audio>`/`<video>`. E.g., it isn't possible to plug into only the portions of `<audio>` that you'd like to override and use the latent Web Audio system to build new behavior.
 
-Related issue: [https://github.com/w3ctag/spec-reviews/issues/5](https://github.com/w3ctag/spec-reviews/issues/5)
+Further concerns include the relationship between Web Audio graphs and the default output context for a page? 
 
-### Object.observe
+### [Object.observe](http://www.html5rocks.com/en/tutorials/es7/observe/)
 
 Good primitive, helps explain things. Lack of implementations is holding it back.
 
-### Intention Events
+### [Intention Events](http://w3c.github.io/editing-explainer/responsive-input-explainer.html)
 
 Ability to understand a platform-specific, high-level intention like "paste", vs. having to reverse-engineer from the specific keyboard events that occurred. This can be especially problematic because the intent can be triggered in different ways in different platforms (or via screen readers etc.). An easy example is how on Windows undo is Ctrl+Z; on Mac it is Cmd+Z; on iOS it is shaking your device up and down.
 
 There is also a problem of not knowing exactly how an element was focused (keyboard focus should show a visual indicator, but mouse should not, and the details may be different per platform).
 
-### Push API
+### [Push API](http://w3c.github.io/push-api/)
 
-Promising work but only half standardized and not fully implemented anywhere yet. New working group forming in IETF to work on the protocol part.
+Promising work but only partially standardized. A new working group [has formed](https://datatracker.ietf.org/doc/charter-ietf-webpush/) in IETF to [work one of the protocols (app server to push server)](https://martinthomson.github.io/drafts/draft-thomson-webpush-http2.html). 
+
+Areas for improvement include standardization of a protocol between the push servers and devices. The W3C API makes use of Promises and Service Worker which is good.
 
 Related issue: [https://github.com/w3ctag/spec-reviews/issues/6](https://github.com/w3ctag/spec-reviews/issues/6)
 
@@ -162,6 +184,8 @@ Zoom levels -- difficult to to detect if the OS has been put into a mode that en
 
 High-contrast mode -- also detectable by side-effect but not available through an API. Many many hacks required for information that UA's are fully aware of. Should likely be exposed through both API and media query.
 
+Some of these concerns are explored in more detail in the ["Gap Analysis: Accessibility"](https://github.com/domenic/html-as-custom-elements/blob/master/docs/accessibility.md) document from the HTML as Custom Elements project.
+
 ### Sensors
 
 We kind of have geolocation and some acces to cameras/mic's, getting ambient light, but not much else. We're slowly getting out of the trap of designing APIs around the assumption of a single sensor of each type. [https://github.com/rwaldron/sensors/](https://github.com/rwaldron/sensors/)
@@ -183,5 +207,20 @@ There are a variety of things that native elements can do that custom elements c
 ### The Event Loop
 
 HTML defines concepts of microtasks, tasks, and the enqueuing thereof. However, there is no way for developers to inspect these queues, hook into them, or even just use them directly without hacks like `Promise.resolve().then(doMyMicrotask)` (and [worse](https://github.com/YuzuJS/setImmediate#the-tricks)). Ideally developers would be able to monitor all entries into the event loop, to better implement things like [zones](https://github.com/btford/zone.js/) without having to monkey-patch every async API on the platform.
+
+### `<img>`
+
+The magic of `<img>` is largely unexplained.  As an early, high level element, we've not gone back and done the work to explain how it is fetched, loaded, decoded, or how it paints and no extensibility points.  At some level it is a "canvas" with a specific algorithm for determining what it draws, yet it has no exposed relationship with canvas or explanation in terms of the canvas API.
+
+Missing APIs include:
+
+ - programmatic access to encoder and decoder apis
+ - control and integration with `Request` generation and dispatch
+ - access to the drawing surface area (is it a `<canvas>`? Something else?)
+ - access to the internals information on which responsive image decisions are made
+
+### [Media Capture](http://dev.w3.org/2009/dap/camera/)
+
+The Media Capture spec allows you to capture content by way of various media capture mechanisms (camera or microphone, for example) according to a MIME type as a form (file) input.  It doesn't describe itself in terms of the obvious lower level API getUserMedia(), so its magic remains unexplained.  
 
 </section>
