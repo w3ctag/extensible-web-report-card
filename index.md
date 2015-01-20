@@ -95,7 +95,7 @@ A good device capability to expose, but not enough implementations!
 
 ### Performance Metrics
 
-We have some loading time APIs (resource timing, navigation timing), but e.g. no [FPS measurement API](https://github.com/w3c/frame-timing/wiki/Explainer).
+We have some loading time APIs ([resource timing](https://w3c.github.io/resource-timing/), [navigation timing](http://w3c.github.io/navigation-timing/), [Server Timing](http://w3c.github.io/server-timing/)), as well as the [frame timing API](http://w3c.github.io/frame-timing/) for smoothness measurements.
 
 ### [Shadow DOM](http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/)
 
@@ -111,7 +111,7 @@ The [Web Audio API](http://webaudio.github.io/web-audio-api/) exists is awesome 
 
 Areas for improvement across the platform remain large: the layering story about how Web Audio explains other APIs remains problematic. How does Web Audio relate to `<audio>` and `<video>` and [WebRTC](http://www.webrtc.org/)? How, for instance, would a developer build a custom element that re-implements `<audio>` using the primitive APIs? It seems that encoding/decoding APIs are missing, buffering and audio file loading are magical, and no API relates an underlying Web Audio context to an `<audio>`/`<video>`. E.g., it isn't possible to plug into only the portions of `<audio>` that you'd like to override and use the latent Web Audio system to build new behavior.
 
-Further concerns include the relationship between Web Audio graphs and the default output context for a page? 
+Further concerns include the relationship between Web Audio graphs and the default output context for a page?
 
 ### [Object.observe](http://www.html5rocks.com/en/tutorials/es7/observe/)
 
@@ -125,7 +125,7 @@ There is also a problem of not knowing exactly how an element was focused (keybo
 
 ### [Push API](http://w3c.github.io/push-api/)
 
-Promising work but only partially standardized. A new working group [has formed](https://datatracker.ietf.org/doc/charter-ietf-webpush/) in IETF to [work one of the protocols (app server to push server)](https://martinthomson.github.io/drafts/draft-thomson-webpush-http2.html). 
+Promising work but only partially standardized. A new working group [has formed](https://datatracker.ietf.org/doc/charter-ietf-webpush/) in IETF to [work one of the protocols (app server to push server)](https://martinthomson.github.io/drafts/draft-thomson-webpush-http2.html).
 
 Areas for improvement include standardization of a protocol between the push servers and devices. The W3C API makes use of Promises and Service Worker which is good.
 
@@ -221,6 +221,6 @@ Missing APIs include:
 
 ### [Media Capture](http://dev.w3.org/2009/dap/camera/)
 
-The Media Capture spec allows you to capture content by way of various media capture mechanisms (camera or microphone, for example) according to a MIME type as a form (file) input.  It doesn't describe itself in terms of the obvious lower level API getUserMedia(), so its magic remains unexplained.  
+The Media Capture spec allows you to capture content by way of various media capture mechanisms (camera or microphone, for example) according to a MIME type as a form (file) input.  It doesn't describe itself in terms of the obvious lower level API getUserMedia(), so its magic remains unexplained.
 
 </section>
